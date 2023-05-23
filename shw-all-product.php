@@ -73,7 +73,7 @@
         
         if (isset($_POST["add"])) {
             $number = $_POST["number"];
-
+            // checks if atleast 1 is selected
             if($number < 0){
                 echo "teweinig geselecteerd";
             }
@@ -86,8 +86,6 @@
             $price = $_POST["price"];
             $cost = $price * $number;
         
-            // Process or store the values as needed
-            // For example, you can add them to the cart or perform any other desired action
         
             // Debugging: you can display the stored values
             echo "Added to cart: ".$productName.", Category: ".$category.", Supplier: ".$supplier.", Prijs: € ".$cost. " , Hoeveelheid: ".$number;
