@@ -1,10 +1,3 @@
-<?php 
-try 
-{ 
-    $db = new PDO('mysql:host=localhost;dbname=broodjeshaven', 'root' ,''); 
-} 
-catch(PDOException $e) 
-{ 
 <?php
 try {
     $db = new PDO('mysql:host=localhost;dbname=broodjeshaven', 'root', '');
