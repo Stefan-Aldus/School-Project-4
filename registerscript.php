@@ -12,9 +12,11 @@
 <body>
     <?php
     session_start();
+    // Checkt of de gebruiker op de juiste manier op de pagina is gekomen, zoniet laat zien dat ze geen toegang hebben tot de pagina
     if (!isset($_POST["registersubmit"]) && !isset($_POST["registerconfirm"])) {
         require("scripts/forbidden.php");
     }
+    // Checkt of de gebruiker heeft gecancelled
     if (isset($_POST["registercancel"])) {
         header("Location: register.php");
     }
@@ -78,20 +80,27 @@
     </form>
 
     <?php
+    // Checkt of de confirmatie is gedrukt
     if (isset($_POST["registerconfirm"])) {
+        // Database connectie
         require_once "dbconnect.php";
+        // Controleert of de ingevoerde wachtwoorden hetzelfde zijn, zoniet killt het de progamma
         if ($_POST["pw"] != $_POST["pw2"]) {
             echo "<p>WACHTWOORDEN KOMEN NIET OVEREEN</p>";
             echo "<p><a href='register.php'>Keer terug naar registerpagina</a></p>";
             die();
         } else {
+            // Hasht de wachtwoorden met BCRYPT
             $hashedpassword = password_hash($_POST["pw"], PASSWORD_BCRYPT);
             try {
+                // Prepares de insert
                 $createuser = $db->prepare("INSERT INTO 
                 client 
                 (first_name, last_name, email, adress, zipcode, city, state, country, telephone, password) 
                 VALUES     
                 (:fname, :lname, :email, :adress, :zipcode, :city, :state, :country, :telephone, :password)");
+
+                // Executes the insert
                 $createuser->execute([
                     ":fname" => $_POST["fname"],
                     ":lname" => $_POST["lname"],
@@ -104,6 +113,7 @@
                     ":telephone" => $_POST["phonenr"],
                     ":password" => $hashedpassword
                 ]);
+                // Vangt de error code en laat hem zien aan de end user om hulp te krijgen in geval van error
             } catch (PDOException $e) {
                 die("<p>Error met maken van accound, de server gaf als error code: " . $e->getCode() . ", neem comtact op met een systeemadmin om het probleem te verhelpen.</p>");
             }
