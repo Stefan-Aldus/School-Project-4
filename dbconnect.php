@@ -1,7 +1,7 @@
 <?php 
 try 
 { 
-    $db = new PDO('mysql:host=localhost;dbname=p04-basis', 'root' ,''); 
+    $db = new PDO('mysql:host=localhost;dbname=broodjeshaven', 'root' ,''); 
 } 
 catch(PDOException $e) 
 { 
