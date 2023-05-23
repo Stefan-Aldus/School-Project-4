@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,31 +8,30 @@
     <link rel="stylesheet" href="..\company.css">
     <title>Update empty passwords</title>
 </head>
+
 <body>
     <?php
-        $defaulPw = "w8woord";
-        $hashedpw = password_hash($defaulPw, PASSWORD_DEFAULT);
+    $defaulPw = "w8woord";
+    $hashedpw = password_hash($defaulPw, PASSWORD_DEFAULT);
 
-        #1 verbinding met database
-        require "../dbconnect.php";
+    #1 verbinding met database
+    require "../dbconnect.php";
 
-        #2 Verwijderen gegevens in de database
-        try 
-        {
-            $updPaswrd = $db->prepare("UPDATE client SET clientpasswrd = :clpwd  WHERE clientpasswrd IS NULL");
-            $updPaswrd->bindValue("clpwd", $hashedpw);
-            $updPaswrd->execute();
+    #2 Verwijderen gegevens in de database
+    try {
+        $updPaswrd = $db->prepare("UPDATE client SET `password` = :clpwd  WHERE `password` IS NULL");
+        $updPaswrd->bindValue("clpwd", $hashedpw);
+        $updPaswrd->execute();
 
-            echo "<h2>Alle lege wachtwoorden zijn gezet naar de opgegeven default</h2>";
-            header('refresh:5; url=../index.php'); 
-            exit(); 
-        }
-        catch(PDOException $e) 
-        {
-            die("Fout bij verbinden met database: ".$e->getMessage());
-        }
-        
+        echo "<h2>Alle lege wachtwoorden zijn gezet naar de opgegeven default</h2>";
+        header('refresh:5; url=../index.php');
+        exit();
+    } catch (PDOException $e) {
+        die("Fout bij verbinden met database: " . $e->getMessage());
+    }
+
     ?>
 
 </body>
+
 </html>
