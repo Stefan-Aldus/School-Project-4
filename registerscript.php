@@ -22,7 +22,7 @@
     }
     ?>
     <header>
-        <?php include 'nav.html' ?>
+        <?php include 'nav.php' ?>
         <h1>Welkom bij de Bread Company</h1>
         <h2>Hier kunt u Registreren!</h2>
         <p>Kloppen de volgende gegevens?</p>
@@ -120,7 +120,7 @@
                 (first_name, last_name, email, adress, zipcode, city, state, country, telephone, password) 
                 VALUES     
                 (:fname, :lname, :email, :adress, :zipcode, :city, :state, :country, :telephone, :password)");
-            
+
                 // Bind the parameters
                 $createuser->bindParam(":fname", $fname);
                 $createuser->bindParam(":lname", $lname);
@@ -132,18 +132,19 @@
                 $createuser->bindParam(":country", $country);
                 $createuser->bindParam(":telephone", $telephone);
                 $createuser->bindParam(":password", $hashedpassword);
-            
+
                 // Execute the insert statement
                 $createuser->execute();
-            
+
                 // Redirect to login.php with a success message
                 header("Location: login.php?message=success");
                 exit();
-                
+
                 // Handle any potential errors
             } catch (PDOException $e) {
                 die("<p>Error met maken van account, de server gaf als error code: " . $e->getCode() . ", neem contact op met een systeembeheerder om het probleem te verhelpen.</p>");
             }
+        }
     }
     ?>
 </body>
