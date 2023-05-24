@@ -80,44 +80,70 @@
     </form>
 
     <?php
-    // Checkt of de confirmatie is gedrukt
+    function sanitizeInput($value)
+    {
+        // Sanitize user input
+        $value = trim($value);
+        $value = stripslashes($value);
+        $value = strip_tags($value);
+        $value = htmlspecialchars($value);
+        return $value;
+    }
+
+    // Check if the confirmation is pressed
     if (isset($_POST["registerconfirm"])) {
-        // Database connectie
+        // Database connection
         require_once "dbconnect.php";
-        // Controleert of de ingevoerde wachtwoorden hetzelfde zijn, zoniet killt het de progamma
+
+        // Sanitize user inputs
+        $fname = sanitizeInput($_POST["fname"]);
+        $lname = sanitizeInput($_POST["lname"]);
+        $email = sanitizeInput($_POST["email"]);
+        $adress = sanitizeInput($_POST["adress"]);
+        $zipcode = sanitizeInput($_POST["zipcode"]);
+        $city = sanitizeInput($_POST["city"]);
+        $state = sanitizeInput($_POST["state"]);
+        $country = sanitizeInput($_POST["country"]);
+        $telephone = sanitizeInput($_POST["phonenr"]);
+        // Check if the entered passwords match; if not, terminate the program
         if ($_POST["pw"] != $_POST["pw2"]) {
             echo "<p>WACHTWOORDEN KOMEN NIET OVEREEN</p>";
             echo "<p><a href='register.php'>Keer terug naar registerpagina</a></p>";
             die();
         } else {
-            // Hasht de wachtwoorden met BCRYPT
+            // Hash the password using BCRYPT
             $hashedpassword = password_hash($_POST["pw"], PASSWORD_BCRYPT);
             try {
-                // Prepares de insert
+                // Prepare the insert statement
                 $createuser = $db->prepare("INSERT INTO 
                 client 
                 (first_name, last_name, email, adress, zipcode, city, state, country, telephone, password) 
                 VALUES     
                 (:fname, :lname, :email, :adress, :zipcode, :city, :state, :country, :telephone, :password)");
-
-                // Executes the insert
-                $createuser->execute([
-                    ":fname" => $_POST["fname"],
-                    ":lname" => $_POST["lname"],
-                    ":email" => $_POST["email"],
-                    ":adress" => $_POST["adress"],
-                    ":zipcode" => $_POST["zipcode"],
-                    ":city" => $_POST["city"],
-                    ":state" => $_POST["state"],
-                    ":country" => $_POST["country"],
-                    ":telephone" => $_POST["phonenr"],
-                    ":password" => $hashedpassword
-                ]);
-                // Vangt de error code en laat hem zien aan de end user om hulp te krijgen in geval van error
+            
+                // Bind the parameters
+                $createuser->bindParam(":fname", $fname);
+                $createuser->bindParam(":lname", $lname);
+                $createuser->bindParam(":email", $email);
+                $createuser->bindParam(":adress", $adress);
+                $createuser->bindParam(":zipcode", $zipcode);
+                $createuser->bindParam(":city", $city);
+                $createuser->bindParam(":state", $state);
+                $createuser->bindParam(":country", $country);
+                $createuser->bindParam(":telephone", $telephone);
+                $createuser->bindParam(":password", $hashedpassword);
+            
+                // Execute the insert statement
+                $createuser->execute();
+            
+                // Redirect to login.php with a success message
+                header("Location: login.php?message=success");
+                exit();
+                
+                // Handle any potential errors
             } catch (PDOException $e) {
-                die("<p>Error met maken van accound, de server gaf als error code: " . $e->getCode() . ", neem comtact op met een systeemadmin om het probleem te verhelpen.</p>");
+                die("<p>Error met maken van account, de server gaf als error code: " . $e->getCode() . ", neem contact op met een systeembeheerder om het probleem te verhelpen.</p>");
             }
-        }
     }
     ?>
 </body>
