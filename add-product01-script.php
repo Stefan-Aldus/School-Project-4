@@ -10,50 +10,50 @@
 <body>
 <header>
 <?php
-    
     session_start();
     if (!isset($_SESSION["signedInCustomer"])) {
         header_remove();
         header("Location: index.php ");
         exit();
     }
+
+    
+    
     require_once("dbconnect.php");
     include "nav.html";
     ?>
 </header>
-    <form method="post" action="">
+    <form method="post" action="add-product01.php">
           <h3>Voeg product toe</h3>
           <div>
           <label for="product">Naam product:</label>
-          <input type="text" id="product" name="product-name" readonly value=<?php echo $_POST["product-name"] ?> />
+          <input type="text" id="product" name="product-name" readonly value="<?php echo $_POST["product-name"] ?>" />
           </div>
           <div>
           <label for="product">Ingredienten: (optioneel)</label>
-          <input type="text" id="product" name="product-ingredients" readonly value=<?php echo $_POST["product-ingredients"] ?> />
+          <input type="text" id="product" name="product-ingredients" readonly value="<?php echo $_POST['product-ingredients']; ?>" />
           </div>
           <div>
           <label for="product">allergien: (optioneel)</label>
-          <input type="text" id="product" name="product-allergens" readonly value=<?php echo $_POST["product-allergens"] ?> />
+          <input type="text" id="product" name="product-allergens" readonly value="<?php echo $_POST['product-allergens']; ?>" />
           </div>
           <div>
           <label for="product">Prijs:</label>
-          <input type="text" id="product" name="product-price" readonly value=<?php echo $_POST["product-price"] ?> />
+          <input type="text" id="product" name="product-price" readonly value="<?php echo $_POST['product-price']; ?>" />
           </div>
           <div>
           <label for="product">Category:</label>
-          <input type="text" id="product" name="product-cat" readonly value=<?php echo $_POST["product-cat"] ?> />
+          <input type="text" id="product" name="product-cat" readonly value="<?php echo $_POST['product-cat']; ?>" />
           </div>
           <div>
           <label for="product">Supplier:</label>
-          <input type="text" id="product" name="product-company" readonly value=<?php echo $_POST["product-company"] ?> />
+          <input type="text" id="product" name="product-company" readonly value="<?php echo $_POST['product-company']; ?>" />
           </div>
           <input type="submit" name="confirm" id="submit" value="weet u zeker dat het klopt?">
           <input type="submit" name="denie" id="submit" value="nee het klopt niet!">
 </body>
-
-
 <?php
-        
+        // using to filter 
         function sanitizeInput($value)
     {
         // Sanitize user input
@@ -102,9 +102,16 @@
     // Checks if the original form is submitted, and calls the filterinput function
     if (isset($_POST["submit"])) {
         // Else checks if the final submit form is submitted, and calls the addtodb function
+        
     } elseif (isset($_POST["confirm"])) {
         addToDB($db);
-    } else {
+    } 
+    
+    elseif (isset($_POST["denie"])) {
+        header_remove();
+        header("Location: add-product01.php ");
+    }
+    else {
         // Else exits the program
         exit("U heeft deze pagina op de verkeerde manier bezocht!");
     }
