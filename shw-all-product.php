@@ -18,7 +18,7 @@
     session_start();
     if (!isset($_SESSION["signedInCustomer"])) {
         header_remove();
-        header("Location: index.php ");
+        header("Location: login.php ");
         exit();
     }
     include "nav.html";
