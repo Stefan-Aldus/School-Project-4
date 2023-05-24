@@ -14,13 +14,16 @@
 		header("location: index.php"); // Replace "index.php" with the desired destination page
 		exit();
 	}
+
+	if (isset($_GET["message"]) && $_GET["message"] === "success") {
+		echo "<p>Account succesvol aangemaakt! U kunt nu inloggen.</p>";
+	}
 	?>
 	<header>
 		<h1>Welkom bij de Bread Company</h1>
 		<!-- hieronder wordt het menu opgehaald. -->
 		<?php
-		session_start();
-		include "nav.html";
+		include "nav.php";
 		?>
 	</header>
 

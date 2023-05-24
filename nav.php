@@ -10,13 +10,13 @@
   <ul class="main-menu">
     <li class="main-item"><a href="index.php">Home</a></li>
     <li class="main-item"><a href="#">Bedrijf</a>
-          <ul>
-            <li><a href="stat-ecofriend.php" class="scndlvl">Eco-vriendelijk</a></li>
-            <li><a href="stat-deliv-return.php" class="scndlvl">Levering-retour</a></li>
-            <li><a href="stat-employees.php" class="scndlvl">Medewerkers</a></li>
-            <li><a href="stat-targets.php" class="scndlvl">Doelstellingen</a></li>
-            <li><a href="stat-history.php" class="scndlvl">Geschiedenis</a></li>
-        </ul>
+      <ul>
+        <li><a href="stat-ecofriend.php" class="scndlvl">Eco-vriendelijk</a></li>
+        <li><a href="stat-deliv-return.php" class="scndlvl">Levering-retour</a></li>
+        <li><a href="stat-employees.php" class="scndlvl">Medewerkers</a></li>
+        <li><a href="stat-targets.php" class="scndlvl">Doelstellingen</a></li>
+        <li><a href="stat-history.php" class="scndlvl">Geschiedenis</a></li>
+      </ul>
     </li>
     <li class="main-item">
       <a href="#">Overzicht</a>
@@ -83,10 +83,28 @@
       </ul>
     </li>
 
-  <li class="main-item"><a href="winkelwagen.php">Winkel wagen</a>
-  
-  </li>
-  
-  
+    <li class="main-item"><a href="#">Account Functies</a>
+      <ul>
+        <?php
+        if (!isset($_SESSION["signedInCustomer"]) && !isset($_SESSION["signedInAdmin"])) {
+          echo '<li><a href="register.php" class="scndlvl">Registreren</a></li>';
+          echo '<li><a href="login.php" class="scndlvl">Login</a></li>';
+        } elseif (isset($_SESSION["signedInCustomer"])) {
+          echo '<li><a href="#" class="scndlvl">KlantPagina Ofz</a></li>';
+          echo '<li><a href="#" class="scndlvl">KlantPagina Ofz</a></li>';
+          echo '<li><a href="#" class="scndlvl">KlantPagina Ofz</a></li>';
+          echo '<li><a href="#" class="scndlvl">KlantPagina Ofz</a></li>';
+        } elseif (isset($_SESSION["signedInAdmin"])) {
+          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
+          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
+          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
+          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
+          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
+          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
+        }
+        ?>
+      </ul>
+    </li>
+
 </div>
 <!-- </nav> -->

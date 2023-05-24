@@ -16,7 +16,7 @@
         <h1>Welkom bij de Bread Company</h1>
         <?php
         session_start();
-        include "nav.html";
+        include "nav.php";
         ?>
         <h2>Hier kunt u Registreren!</h2>
     </header>
