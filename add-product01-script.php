@@ -11,7 +11,14 @@
 <header>
 <?php
     session_start();
-    if (!isset($_SESSION["signedInCustomer"])) {
+    // check if you canceled your action and if so it will redirect you back
+    if (isset($_POST["denie"])) {
+        header_remove();
+        header("Location: add-product01.php ");
+    }
+
+    // checks if user is signed in as a Admin, if not it will redirect you to the login page
+    if (!isset($_SESSION["signedInAdmin"])) {
         header_remove();
         header("Location: index.php ");
         exit();
@@ -53,7 +60,7 @@
           <input type="submit" name="denie" id="submit" value="nee het klopt niet!">
 </body>
 <?php
-        // using to filter 
+        // filter functie
         function sanitizeInput($value)
     {
         // Sanitize user input
@@ -66,6 +73,7 @@
 
     ;
     function addToDB($db) {
+        // saving the filter word from the post into variables
         $filteredName = sanitizeInput($_POST["product-name"]);
         $filteredingredients = sanitizeInput($_POST["product-ingredients"]);
         $filteredAllergens = sanitizeInput($_POST["product-allergens"]);
@@ -78,16 +86,18 @@
         } catch (PDOException $e) {
             die("FOUT IN SQL QUERY " . $e->getMessage());
         }
-
+        // executing quarry's
+        // Retrieving id' from supplier (company)
         $retrievecompid->execute([":company" => $_POST["product-company"] ]);
         $compid = $retrievecompid->fetch();
+        // Retrieving id from category 
         $retrievecatid->execute([":name" => $_POST["product-cat"] ]);
         $catid = $retrievecatid->fetch();
         
         // variable to set inactive to 0 by default
         $isinactive = 0;
 
-
+        // excecuting the the quary to insert the product
         $addprod->execute([
             ":productname" => $filteredName,
             ":ingredients" => $filteredingredients,
@@ -107,10 +117,6 @@
         addToDB($db);
     } 
     
-    elseif (isset($_POST["denie"])) {
-        header_remove();
-        header("Location: add-product01.php ");
-    }
     else {
         // Else exits the program
         exit("U heeft deze pagina op de verkeerde manier bezocht!");
