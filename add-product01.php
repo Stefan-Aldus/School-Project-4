@@ -12,7 +12,7 @@
 <?php
     
     session_start();
-    if (!isset($_SESSION["signedInCustomer"])) {
+    if (!isset($_SESSION["signedInAdmin"])) {
         header_remove();
         header("Location: index.php ");
         exit();
