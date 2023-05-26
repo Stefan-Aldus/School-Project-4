@@ -95,6 +95,24 @@
         // Database connection
         require_once "dbconnect.php";
 
+        try {
+            $query = $db->prepare("SELECT count(*) FROM client where email = :email");
+            $query->bindValue(":email", $_POST["email"]);
+            $query->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        $results = $query->fetch();
+
+        if ($results >= 1) {
+            echo 'Account bestaat al';
+            sleep(5);
+            header("Location: register.php");
+            exit();
+        }
+
+
         // Sanitize user inputs
         $fname = sanitizeInput($_POST["fname"]);
         $lname = sanitizeInput($_POST["lname"]);
@@ -137,6 +155,7 @@
                 $createuser->execute();
 
                 // Redirect to login.php with a success message
+                header_remove();
                 header("Location: login.php?message=success");
                 exit();
 
