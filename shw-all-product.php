@@ -14,25 +14,25 @@
 
 <body>
     <?php
-    
+
     session_start();
-    if (!isset($_SESSION["signedInCustomer"])) {
+    if (!isset($_SESSION["signedInCustomer"]) && !isset($_SESSION["signedInAdmin"])) {
         header_remove();
         header("Location: login.php ");
         exit();
     }
-    include "nav.html";
+    include "nav.php";
 
 
-    
+
 
     ?>
     <main class="flexverticalcenter">
         <h2 class="spacebelowabove">Overzicht van alle producten</h2>
         <?php
-        if (!isset($_SESSION["signedInCustomer"])) {
-            echo 'Je moet ingelogd zijn om te bestellen! <br>';
-        }
+        // if (!isset($_SESSION["signedInCustomer"])) {
+        //     echo 'Je moet ingelogd zijn om te bestellen! <br>';
+        // }
         // Verbinding maken met de database 
         require_once("dbconnect.php");
 
@@ -55,9 +55,12 @@
               <th>Product naam</th>
               <th>Category</th>
               <th>Supplier</th>
-              <th>Prijs per product</th>
-              <th>Hoeveelheid</th>
-              </thead>";
+              <th>Prijs per product</th>";
+        if (isset($_SESSION["signedInCustomer"])) {
+            echo "<th>Hoeveelheid</th>";
+        }
+        ;
+        echo "<th>Inactief</th> </thead>";
         echo "<tbody>";
 
         // Alle gegevens uit purchase op het scherm tonen
@@ -69,10 +72,17 @@
             echo "<td>" . $data["Category"] . "</td>";
             echo "<td>" . $data["Supplier"] . "</td>";
             echo "<td> € " . $data["price"] . "</td>";
-            echo '<td> <input type="number" name="number" id="number"></td>';
 
             if (isset($_SESSION["signedInCustomer"])) {
+                echo '<td> <input type="number" name="number" id="number"></td>';
                 echo '<td> <input type="submit" name="add" value="add to cart"></td>';
+            } elseif (isset($_SESSION["signedInAdmin"])) {
+                echo "<td> " . $data["isinactive"] . "</td>";
+                if ($data["isinactive"] == 1) {
+                    echo '<td> <input type="submit" name="setactive" value="Zet Actief"></td>';
+                } else {
+                    echo '<td> <input type="submit" name="setinactive" value="Zet Inactief"></td>';
+                }
             }
 
 
@@ -141,6 +151,68 @@
 
                 $message = "Insertion successful";
             }
+        }
+
+        if (isset($_POST["setinactive"])) {
+            // Haalt de productID uit de form
+            $id = $_POST["productid"];
+            // Checkt de huidige activiteit
+            try {
+                $checkactivity = $db->prepare("SELECT isinactive FROM product WHERE ID = :id");
+                $checkactivity->bindValue(":id", $id);
+                $checkactivity->execute();
+            } catch (PDOException $e) {
+                echo "Error in SQL:" . $e->getMessage();
+            }
+
+
+            $currentactivity = $checkactivity->fetch();
+
+            if ($currentactivity['isinactive'] == 0) {
+                try {
+                    $setactivity = $db->prepare("UPDATE product SET isinactive = :activity WHERE ID = :id");
+                    $setactivity->bindValue(":activity", 1);
+                    $setactivity->bindValue(":id", $id);
+                } catch (PDOException $e) {
+                    echo "Fout in zet activiteit statement: " . $e->getMessage();
+                }
+                $setactivity->execute();
+                echo "<script>window.location.reload()</script>";
+            } else {
+                echo "<p>Dit product is nu inactief</p>";
+            }
+            ;
+        }
+
+        if (isset($_POST["setactive"])) {
+            // Haalt de productID uit de form
+            $id = $_POST["productid"];
+            // Checkt de huidige activiteit
+            try {
+                $checkactivity = $db->prepare("SELECT isinactive FROM product WHERE ID = :id");
+                $checkactivity->bindValue(":id", $id);
+                $checkactivity->execute();
+            } catch (PDOException $e) {
+                echo "Error in SQL:" . $e->getMessage();
+            }
+
+
+            $currentactivity = $checkactivity->fetch();
+
+            if ($currentactivity['isinactive'] == 1) {
+                try {
+                    $setactivity = $db->prepare("UPDATE product SET isinactive = :activity WHERE ID = :id");
+                    $setactivity->bindValue(":activity", 0);
+                    $setactivity->bindValue(":id", $id);
+                } catch (PDOException $e) {
+                    echo "Fout in zet activiteit statement: " . $e->getMessage();
+                }
+                $setactivity->execute();
+                echo "<script>window.location.reload()</script>";
+            } else {
+                echo "<p>Dit product is nu actief</p>";
+            }
+            ;
         }
 
 
