@@ -9,14 +9,13 @@
 
 <body>
 	<?php
+
+	// use LDAP\Result;
+	
 	session_start();
-	if (isset($_SESSION["signedInCustomer"])) {
+	if (isset($_SESSION["signedInAdmin"])) {
 		header("location: index.php"); // Replace "index.php" with the desired destination page
 		exit();
-	}
-
-	if (isset($_GET["message"]) && $_GET["message"] === "success") {
-		echo "<p>Account succesvol aangemaakt! U kunt nu inloggen.</p>";
 	}
 	?>
 	<header>
@@ -44,7 +43,10 @@
 			<div>
 				<input type="submit" name="login" value="Login">
 			</div>
-			</form>
+		</form>
+		<button>
+			<a href="login.php">Log in als Gebruiker (Andere gegevens)</a>
+		</button>
 	</main>
 	<?php
 	require_once 'dbconnect.php';

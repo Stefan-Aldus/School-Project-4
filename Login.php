@@ -45,6 +45,9 @@
 				<input type="submit" name="login" value="Login">
 			</div>
 		</form>
+		<button>
+			<a href="login-admin.php">Log in als Admin (Andere gegevens)</a>
+		</button>
 	</main>
 	<?php
 	require_once 'dbconnect.php';

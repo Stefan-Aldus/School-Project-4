@@ -148,3 +148,10 @@ li.frstlvl > a {
 }
 /*
  */
+
+ /* Styling maar niet veel */
+
+ button a {
+  text-decoration: none;
+  color: navy !important;
+ }
