@@ -80,6 +80,23 @@ function sanitizeInput($value)
 ;
 function addToDB($db)
 {
+    try {
+        $query = $db->prepare("SELECT count(*) FROM product where productname = :name");
+        $query->bindValue(":name", $_POST["product-name"]);
+        $query->execute();
+    } catch (PDOException $e) {
+        die($e->getMessage());
+    }
+
+    $results = $query->fetch();
+
+    if ($results[0] >= 1) {
+        echo 'Product bestaat al';
+        // sleep(5);
+        // header("Location: register.php");
+        echo '<script>window.location.replace("add-product01.php")</script>';
+        exit();
+    }
     // echo ("TEST3");
     // saving the filter word from the post into variables
     $filteredName = sanitizeInput($_POST["product-name"]);
@@ -128,6 +145,7 @@ if (isset($_POST["submit"])) {
 if (isset($_POST["confirm"])) {
     // echo ("TEST2");
     addToDB($db);
+} elseif (isset($_POST["submit"])) {
 } else {
     // Else exits the program
     exit("U heeft deze pagina op de verkeerde manier bezocht!");
