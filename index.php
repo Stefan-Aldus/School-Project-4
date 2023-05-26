@@ -14,7 +14,11 @@
 		<?php
 		session_start();
 		include "nav.php";
-		?>
+		if (isset($_GET['message'])) {
+			$message = $_GET['message'];
+			// Display the message on the page or perform any desired actions
+			echo '<script>alert("' . $message . '")</script>';
+		} ?>
 	</header>
 
 	<!-- op de home pagina wat enthousiaste tekst over het bedrijf en de producten -->

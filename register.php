@@ -1,5 +1,3 @@
-<!-- Fuck berkhout -->
-
 <!DOCTYPE html>
 <html lang="en">
 
