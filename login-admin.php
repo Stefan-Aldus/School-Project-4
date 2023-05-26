@@ -30,7 +30,7 @@
 	<!-- Deze pagina is bestemd om functionaliteiten die nog niet af zijn van een 
 	nette boodschap te voorzien -->
 	<main>
-		<h2>Login</h2>
+		<h2>Login Admin</h2>
 		<br>
 		<form method="post" action="">
 			<div>
@@ -44,7 +44,7 @@
 			<div>
 				<input type="submit" name="login" value="Login">
 			</div>
-		</form>
+			</form>
 	</main>
 	<?php
 	require_once 'dbconnect.php';
@@ -54,10 +54,9 @@
 		$email = $_POST["email"];
 		$password = $_POST["password"];
 
-
 		// Prepares the statement to select the email from the database
 		$check = $db->prepare("SELECT COUNT(*) FROM client WHERE email = :email");
-		// Executes the statement witht he email variable
+		// Executes the statement with the email variable
 		$check->execute([":email" => $email]);
 
 		// Fetches the result
@@ -65,34 +64,29 @@
 
 		// Checks if the account exists in the database
 		if ($exists == 1) {
-			// Retrieves the hashed password from the database
-			$retrievehashed = $db->prepare("SELECT password FROM client WHERE email = :email");
-			$retrievehashed->execute([":email" => $email]);
+			// Retrieves the hashed password and admin status from the database
 			$retrieveData = $db->prepare("SELECT password, isadmin FROM client WHERE email = :email");
 			$retrieveData->execute([":email" => $email]);
+
 			$userData = $retrieveData->fetch();
+
 			$hashedPassword = $userData['password'];
 			$isAdmin = $userData['isadmin'];
-			$hashedpassword = $retrievehashed->fetch()['password'];
 
-			if (password_verify($password, $hashedpassword) && $isAdmin == 0) {
+			if (password_verify($password, $hashedPassword) && $isAdmin == 1) {
 				$id = $db->prepare("SELECT id, first_name FROM client WHERE email = :email");
 				$id->execute([":email" => $email]);
-				$_SESSION['signedInCustomer'] = $id->fetch()['id'];
+				$_SESSION['signedInAdmin'] = $id->fetch()['id'];
 				$firstname = $db->prepare("SELECT first_name FROM client WHERE id = :id");
-				$firstname->execute([":id" => $_SESSION['signedInCustomer']]);
-				echo "<p>U bent succesvol ingelogd,  </p>" . $firstname->fetch()['first_name'];
+				$firstname->execute([":id" => $_SESSION['signedInAdmin']]);
+				echo "<p>U bent succesvol ingelogd, " . $firstname->fetch()['first_name'] . "</p>";
+
 			} else {
-				echo '<p>Email of wachtwoord incorrect,
-				If Admin login via admin login.
-				
-				</p>';
+				echo '<p>Email, Wachtwoord of Admin incorrect</p>';
 			}
 		} else {
-			echo '<p>Email of wachtwoord incorrect,
-			If Admin login via admin login.</p>';
+			echo '<p>Email, Wachtwoord of Admin incorrect</p>';
 		}
-		;
 	}
 	if (isset($_POST['login'])) {
 		submitted($db);
