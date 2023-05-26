@@ -50,7 +50,7 @@
         </div>
         <div>
             <label for="product">Prijs:</label>
-            <input type="text" id="product" name="product-price" readonly
+            <input type="number" id="product" name="product-price" readonly
                 value="<?php echo $_POST['product-price']; ?>" />
         </div>
         <div>
