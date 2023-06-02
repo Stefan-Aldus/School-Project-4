@@ -22,20 +22,20 @@
     include "nav.php";
     ?>
   </header>
-  <form method="post" action="add-product01-script.php">
-    <h3>Voeg product toe</h3>
+  <form method="post" action="add-country01-script.php">
+    <h3>Voeg land toe</h3>
     <div>
       <label for="product">Naam Land:</label>
-      <input type="text" id="product" name="Country-name" required />
+      <input type="text" id="product" name="country-name" required />
     </div>
     <div>
       <label for="product">LandenCode:</label>
-      <input type="text" id="product" name="Country-Code" required />
+      <input type="text" id="product" name="country-code" required />
         <?php
         // defines a Query for catorgory's
-        $retreiveCategories = $db->prepare("SELECT `name` FROM country");
-        $retreiveCategories->execute();
-        $categoryNames = $retreiveCategories->fetchAll();
+        $retreivecountry = $db->prepare("SELECT `name` FROM country");
+        $retreivecountry->execute();
+        $countrynames = $retreivecountry->fetchAll();
         // for each catorgory it will echo it in the select
 
         ?>
