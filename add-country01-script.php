@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,15 +29,17 @@
         include "nav.php";
         ?>
     </header>
-    <form method="post" action="">
+    <form method="post">
         <h3>Voeg land toe</h3>
         <div>
             <label for="product">Naam Land:</label>
-            <input type="text" id="product" name="country-name" readonly value="<?php echo $_POST["country-name"]; ?>" />
+            <input type="text" id="countryname" name="country-name" readonly
+                value="<?php echo $_POST["country-name"]; ?>" />
         </div>
         <div>
             <label for="product">Land Code:</label>
-            <input type="text" id="product" name="country-code" readonly value="<?php echo $_POST['country-code']; ?>" />
+            <input type="text" id="countrycode" name="country-code" readonly
+                value="<?php echo $_POST['country-code']; ?>" />
         </div>
         <input type="submit" name="confirm" id="submit" value="Weet u zeker dat het klopt?">
         <input type="submit" name="denie" id="submit" value="Nee, het klopt niet!">
@@ -44,13 +47,11 @@
 
     <?php
     // Function to sanitize input
+// Function to sanitize input
     function sanitizeInput($value)
     {
         // Sanitize user input
         $value = trim($value);
-        $value = stripslashes($value);
-        $value = strip_tags($value);
-        $value = htmlspecialchars($value);
         return $value;
     }
 
@@ -58,7 +59,8 @@
     function addToDB($db)
     {
         try {
-            $query = $db->prepare("SELECT count(*) FROM country");
+            $query = $db->prepare("SELECT count(*) FROM country WHERE  `name` = :name");
+            $query->bindParam(':name', $_POST["country-name"]);
             $query->execute();
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -95,4 +97,5 @@
 
     ?>
 </body>
+
 </html>
