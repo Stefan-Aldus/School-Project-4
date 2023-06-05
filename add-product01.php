@@ -20,7 +20,7 @@
       exit();
     }
     require_once("dbconnect.php");
-    include "nav.html";
+    include "nav.php";
     ?>
   </header>
   <form method="post" action="add-product01-script.php">

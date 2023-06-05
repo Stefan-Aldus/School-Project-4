@@ -1,30 +1,31 @@
 <!DOCTYPE html>
-<html lang="nl"> 
+<html lang="nl">
+
 <head>
-	 <meta charset="UTF-8">
-	 <title>Bread Company</title>
-	 <link rel="stylesheet" type="text/css" href="company.css">  
+    <meta charset="UTF-8">
+    <title>Bread Company</title>
+    <link rel="stylesheet" type="text/css" href="company.css">
 </head>
 
 <body>
-	<header>
-		<h1>Welkom bij de Bread Company</h1>
-		<!-- hieronder wordt het menu opgehaald. -->
-		<?php
-			session_start(); 
-			include "nav.html";
-		?>
-	</header>
- 
-	<!-- op de home pagina wat enthousiaste tekst over het bedrijf en de producten -->
- 	<main class="flexverticalcenter">
+    <header>
+        <h1>Welkom bij de Bread Company</h1>
+        <!-- hieronder wordt het menu opgehaald. -->
+        <?php
+        session_start();
+        include "nav.php";
+        ?>
+    </header>
+
+    <!-- op de home pagina wat enthousiaste tekst over het bedrijf en de producten -->
+    <main class="flexverticalcenter">
         <h2>
             Compliment over de website
         </h2>
 
         <p>
-            U heeft aangegeven een compliment te willen geven over onze website. Uiteraard zijn wij daar erg 
-            blij mee. Wilt u onderstaand wat gegevens invullen en precies vertellen wat u goed vindt aan de 
+            U heeft aangegeven een compliment te willen geven over onze website. Uiteraard zijn wij daar erg
+            blij mee. Wilt u onderstaand wat gegevens invullen en precies vertellen wat u goed vindt aan de
             website?
         </p>
         <form action="rvw-gd-website02.php" method="post">
@@ -42,4 +43,5 @@
         </form>
     </main>
 </body>
+
 </html>

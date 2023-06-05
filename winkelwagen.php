@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,12 @@
     <link rel="stylesheet" href="company.css">
     <title>Document</title>
 </head>
+
 <body>
-<?php
-			session_start(); 
-			include "nav.html";
-		?>
+    <?php
+    session_start();
+    include "nav.php";
+    ?>
 </body>
+
 </html>
