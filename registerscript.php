@@ -105,10 +105,10 @@
 
         $results = $query->fetch();
 
-        if ($results >= 1) {
-            echo 'Account bestaat al';
-            sleep(5);
-            header("Location: register.php");
+        if ($results[0] >= 1) {
+            echo 'Account bestaat al, u wordt zo geredirect.';
+            echo '<script>setTimeout(function() { window.location.replace("register.php"); }, 5000);</script>';
+            // header("Location: register.php");
             exit();
         }
 
@@ -155,8 +155,10 @@
                 $createuser->execute();
 
                 // Redirect to login.php with a success message
-                header_remove();
-                header("Location: login.php?message=success");
+                // header_remove();
+                // header("Location: login.php?message=success");
+                echo 'Account aangemaakt, U wordt zo geredirect';
+                echo '<script>setTimeout(function() { window.location.replace("login.php"); }, 5000);</script>';
                 exit();
 
                 // Handle any potential errors
