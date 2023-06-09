@@ -77,7 +77,7 @@
     <li class="main-item"><a href="#">verwijderen</a>
       <ul>
         <li><a href="remove-client.php" class="scndlvl">Klant</a></li>
-        <li><a href="remove-category.php" class="scndlvl">Categorien</a></li>
+        <li><a href="remove-cat.php" class="scndlvl">Categorien</a></li>
         <li><a href="remove-product.php" class="scndlvl">producten</a></li>
       </ul>
     </li>
