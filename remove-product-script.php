@@ -13,7 +13,7 @@ session_start();
 // check if you canceled your action and if so it will redirect you back
 if (isset($_POST["denie"])) {
     header_remove();
-    header("Location: remove-client.php ");
+    header("Location: remove-product.php ");
 }
     if (!isset($_SESSION["signedInAdmin"])) {
         header_remove();
