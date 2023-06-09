@@ -98,7 +98,7 @@
           echo '<li><a href="login.php" class="scndlvl">Login</a></li>';
         } elseif (isset($_SESSION["signedInCustomer"])) {
           echo '<li><a href="logout.php" class="scndlvl">Log Uit</a></li>';
-          echo '<li><a href="#" class="scndlvl">KlantPagina Ofz</a></li>';
+          echo '<li><a href="change-pass.php" class="scndlvl">verander wachtwoord</a></li>';
           echo '<li><a href="#" class="scndlvl">KlantPagina Ofz</a></li>';
           echo '<li><a href="#" class="scndlvl">KlantPagina Ofz</a></li>';
         } elseif (isset($_SESSION["signedInAdmin"])) {
