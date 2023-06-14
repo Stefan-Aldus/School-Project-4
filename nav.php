@@ -25,6 +25,9 @@
           <ul>
             <li><a href="shw-all-category.php" class="thrdlvl">Categorieën</a></li>
             <li><a href="shw-all-client.php" class="thrdlvl">Klanten</a></li>
+            <li><a href="show-all-show-prod-orders.php" class="thrdlvl">bestelling producten</a></li>
+            <li><a href="shw-all-admins.php" class="thrdlvl">beheerders</a></li>
+            <li><a href="shw-all-client.php" class="thrdlvl">Klanten</a></li>
             <li><a href="shw-all-supplier.php" class="thrdlvl">Leveranciers</a></li>
             <li><a href="shw-all-product.php" class="thrdlvl">Produkten</a></li>
             <li><a href="shw-all-purchase.php" class="thrdlvl">Aankopen</a></li>
