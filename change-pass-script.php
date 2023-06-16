@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header> -->
         <?php
         session_start();
 
@@ -23,7 +23,7 @@
         require_once("dbconnect.php");
         include "nav.php";
         ?>
-    </header>
+    <!-- </header> -->
 
     <main>
         <h2>Weet u zeker dat u uw wachtwoord wilt veranderen?</h2>

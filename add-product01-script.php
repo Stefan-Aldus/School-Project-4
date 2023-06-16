@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header> -->
         <?php
         session_start();
         // check if you canceled your action and if so it will redirect you back
@@ -31,7 +31,7 @@
         require_once("dbconnect.php");
         include "nav.php";
         ?>
-    </header>
+    <!-- </header> -->
     <form method="post" action="">
         <h3>Voeg product toe</h3>
         <div>

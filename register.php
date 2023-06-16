@@ -10,14 +10,14 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header> -->
         <h1>Welkom bij de Bread Company</h1>
         <?php
         session_start();
         include "nav.php";
         ?>
         <h2>Hier kunt u Registreren!</h2>
-    </header>
+    <!-- </header> -->
     <form method="POST" action="registerscript.php">
         <div>
             <label for="email">Voer uw email hier in:</label>

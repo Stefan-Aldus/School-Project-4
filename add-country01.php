@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <header>
+  <!-- <header> -->
     <?php
 
     session_start();
@@ -21,7 +21,7 @@
     require_once("dbconnect.php");
     include "nav.php";
     ?>
-  </header>
+  <!-- </header> -->
   <form method="post" action="add-country01-script.php">
     <h3>Voeg land toe</h3>
     <div>
