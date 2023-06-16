@@ -28,7 +28,7 @@
 
     ?>
     <main class="flexverticalcenter">
-        <h2 class="spacebelowabove">Overzicht van alle producten</h2>
+        <h2 class="spacebelowabove">Overzicht van inactieve producten</h2>
         <?php
         // if (!isset($_SESSION["signedInCustomer"])) {
         //     echo 'Je moet ingelogd zijn om te bestellen! <br>';
