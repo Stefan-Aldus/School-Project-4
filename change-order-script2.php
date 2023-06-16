@@ -29,7 +29,13 @@
     <main>
         <form action="change-order-script3.php" method="post">
             <h3>pas product aan</h3>
-
+            <?php  
+            // saving old variables
+                $pid= $_POST["pid"];
+                echo '<input type="hidden" name="pid" value="' . $pid . '">'; 
+                $oldproductname =  $_POST["oldproductname"];
+                echo '<input type="hidden" name="oldproductname" value="' . $oldproductname . '">'; 
+                ?>
            
             <div>
                 <label for="klant">naam:</label>
@@ -41,7 +47,7 @@
                 $productNames = $retreiveProducts->fetchAll();
                 // for each catorgory it will echo it in the select
                 foreach ($productNames as $productName) {
-                    $selected = ($productName['productname'] === $_POST["productname"]) ? 'selected' : '';
+                    $selected = ($productName['productname'] === $_SESSION["oldproductname"]) ? 'selected' : '';
                     echo '<option class="<3 Berkhout" ' . $selected . '>' . $productName['productname'] . '</option>';
                 }
 
@@ -51,11 +57,18 @@
                     <label for="klant">hoeveelheid:</label>
                     <input type="number" id="quantity" name="quantity" value="<?php echo $_POST["quantity"] ?>" />
                 </div>
-                <input type="submit" name="confirm" id="submit" value="verander">
 
+                
+                <input type="submit" name="confirm" id="submit" value="verander">
                 <?php  
-                $pid= $_POST["pid"];
-                echo '<input type="hidden" name="pid" value="' . $pid . '">';  ?>
+                // saving other old variables
+                $pid = $_POST["pid"];
+                echo '<input type="hidden" name="pid" value="' . $pid . '">'; 
+                $oldproductname =  $_POST["oldproductname"];
+                echo '<input type="hidden" name="oldproductname" value="' . $oldproductname . '">'; 
+                ?>
+                
+                
         </form>
 
 

@@ -21,7 +21,7 @@ session_start();
     
     ?>
     <main class="flexverticalcenter">
-        <h2 class="spacebelowabove">Overzicht van alle klanten zonder bestelling</h2>
+        <h2 class="spacebelowabove">Overzicht producten bij de bestelling</h2>
         <?php
         require_once("dbconnect.php");
 
@@ -61,11 +61,11 @@ session_start();
             echo "<td>" . $data["productname"] . "</td>";
             echo "<td>" . $data["quantity"] . "</td>";
             echo "<td>" . $data["price"] . "</td>";
-            echo '<td> <input type="submit" name="delete" value="verwijder"></td>';
+            echo '<td> <input type="submit" name="submito" value="verwijder"></td>';
 
             // Store the $data values in hidden input fields
             echo '<input type="hidden" name="clientid" value="' . $data["ID"] . '">';
-            echo '<input type="hidden" name="productname" value="' . $data["productname"] . '">';
+            echo '<input type="hidden" name="oldproductname" value="' . $data["productname"] . '">';
             echo '<input type="hidden" name="quantity" value="' . $data["quantity"] . '">';
             echo '<input type="hidden" name="email" value="' . $data["price"] . '">';
             echo '<input type="hidden" name="pid" value="' . $pid . '">';
@@ -73,6 +73,15 @@ session_start();
             echo "</form>";
         }
         ?>
+
+        <?php
+
+
+if(isset($_POST["delete"])) {
+    $_SESSION["oldproductname"] = $data["productname"];
+    $_SESSION["pid"] = $pid;
+     }
+     ?>
     </main>
 </body>
 </html>

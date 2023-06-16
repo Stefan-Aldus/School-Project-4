@@ -103,7 +103,7 @@
           echo '<li><a href="#" class="scndlvl">KlantPagina Ofz</a></li>';
         } elseif (isset($_SESSION["signedInAdmin"])) {
           echo '<li><a href="logout-admin.php" class="scndlvl">Logout</a></li>';
-          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
+          echo '<li><a href="change-order.php" class="scndlvl">change orders</a></li>';
           echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
           echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
           echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';

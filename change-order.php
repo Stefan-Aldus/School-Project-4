@@ -20,7 +20,7 @@ session_start();
     
     ?>
     <main class="flexverticalcenter">
-        <h2 class="spacebelowabove">Overzicht van alle klanten zonder bestelling</h2>
+        <h2 class="spacebelowabove">Overzicht van alle bestellingen</h2>
         <?php
         require_once("dbconnect.php");
 
