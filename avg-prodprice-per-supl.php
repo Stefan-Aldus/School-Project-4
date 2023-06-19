@@ -8,6 +8,7 @@
 
 <body>
     <?php
+    session_start();
     if (!isset($_SESSION["signedInAdmin"])) {
         header("Location: login-admin.php");
         die("U moet admin zijn voor deze pagina.");
