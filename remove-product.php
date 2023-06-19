@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,11 @@
     <link rel="stylesheet" href="company.css">
     <title>Document</title>
 </head>
+
 <body>
 
-<?php
-session_start();
+    <?php
+    session_start();
     if (!isset($_SESSION["signedInAdmin"])) {
         header_remove();
         header("Location: index.php ");
@@ -18,7 +20,7 @@ session_start();
         exit();
     }
     include "nav.php";
-    
+
     ?>
     <main class="flexverticalcenter">
         <h2 class="spacebelowabove">Overzicht van alle producten zonder active bestelling</h2>
@@ -26,18 +28,14 @@ session_start();
         require_once("dbconnect.php");
 
         // Alle producten ophalen met de bijbehorende gegevens
-        $query = $db->prepare("SELECT GROUP_CONCAT(purchaseline.ID) AS purchaselineIDs, product.productname
-        FROM purchaseline
-        JOIN purchase ON purchaseline.purchaseid = purchase.ID
-        INNER JOIN product ON purchaseline.productid = product.ID
-        WHERE purchase.delivered = 1
-          AND NOT EXISTS (
-            SELECT 1
-            FROM purchase p2
-            WHERE purchaseline.purchaseID = p2.ID
-              AND p2.delivered = 0
-          )
-        GROUP BY product.productname;");
+        $query = $db->prepare("SELECT *
+        FROM product
+        WHERE ID NOT IN (
+            SELECT DISTINCT productid
+            FROM purchaseline pl
+            INNER JOIN purchase pu ON pl.purchaseid = pu.ID
+            WHERE pu.delivered = 0
+        );");
 
         $query->execute();
         $resultq = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -70,6 +68,8 @@ session_start();
         ?>
     </main>
 </body>
+
 </html>
 </body>
+
 </html>
