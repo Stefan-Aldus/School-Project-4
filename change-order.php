@@ -53,7 +53,7 @@ session_start();
             echo "<td>" . $data["purchasedate"] . "</td>";
             echo "<td>" . $data["delivered"] . "</td>";
             
-            echo '<td> <input type="submit" name="delete" value="verwijder"></td>';
+            echo '<td> <input type="submit" name="delete" value="select"></td>';
 
             // Store the $data values in hidden input fields
             echo '<input type="hidden" name="pid" value="' . $data["ID"] . '">';

@@ -59,7 +59,7 @@
                 </div>
 
                 
-                <input type="submit" name="confirm" id="submit" value="verander">
+                <input type="submit" name="confirm" id="submit" value="pas aan">
                 <?php  
                 // saving other old variables
                 $pid = $_POST["pid"];

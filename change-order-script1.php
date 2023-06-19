@@ -61,7 +61,7 @@ session_start();
             echo "<td>" . $data["productname"] . "</td>";
             echo "<td>" . $data["quantity"] . "</td>";
             echo "<td>" . $data["price"] . "</td>";
-            echo '<td> <input type="submit" name="submito" value="verwijder"></td>';
+            echo '<td> <input type="submit" name="submito" value="select"></td>';
 
             // Store the $data values in hidden input fields
             echo '<input type="hidden" name="clientid" value="' . $data["ID"] . '">';
