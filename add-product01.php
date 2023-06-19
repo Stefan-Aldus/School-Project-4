@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <header>
+  <!-- <header> -->
     <?php
 
     session_start();
@@ -22,7 +22,7 @@
     require_once("dbconnect.php");
     include "nav.php";
     ?>
-  </header>
+  <!-- </header> -->
   <form method="post" action="add-product01-script.php">
     <h3>Voeg product toe</h3>
     <div>

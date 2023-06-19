@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<header>
+	<!-- <header> -->
 		<h1>Welkom bij de Bread Company</h1>
 		<!-- hieronder wordt het menu opgehaald. -->
 		<?php
@@ -19,7 +19,7 @@
 			// Display the message on the page or perform any desired actions
 			echo '<script>alert("' . $message . '")</script>';
 		} ?>
-	</header>
+	<!-- </header> -->
 
 	<!-- op de home pagina wat enthousiaste tekst over het bedrijf en de producten -->
 	<main>

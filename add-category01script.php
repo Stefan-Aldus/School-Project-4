@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <header>
+  <!-- <header> -->
     <?php
     session_start();
     if (!isset($_SESSION["signedInAdmin"])) {
@@ -20,7 +20,7 @@
     require_once("dbconnect.php");
     include "nav.php";
     ?>
-  </header>
+  <!-- </header> -->
 
   <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <h3>Voeg Category toe</h3>

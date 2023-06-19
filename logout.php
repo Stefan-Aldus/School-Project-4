@@ -10,14 +10,14 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header> -->
         <h1>Welkom bij de Bread Company</h1>
         <?php
         session_start();
         include "nav.php";
         ?>
         <h2>Hier kunt u uit loggen!</h2>
-    </header>
+    <!-- </header> -->
 
     <form method="post" action="logoutUserScript.php">
         <p>Wilt u echt uitloggen?</p>

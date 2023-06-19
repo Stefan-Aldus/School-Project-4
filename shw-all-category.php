@@ -10,13 +10,13 @@
 </head>
 
 <body>
-  <header>
+  <!-- <header> -->
     <?php
     session_start();
     require_once("dbconnect.php");
     include "nav.php";
     ?>
-  </header>
+  <!-- </header> -->
   <h1>Overzicht Categorieën</h1>
   <p>Hier kunt u een overzicht zien van al onze categorieën die wij aanbieden.</p>
 

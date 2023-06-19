@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header> -->
         <?php
         
         
@@ -27,7 +27,7 @@
         require_once("dbconnect.php");
         include "nav.php";
         ?>
-    </header>
+    <!-- </header> -->
 
     <main>
 <form action="change-pass-script.php" method="post"

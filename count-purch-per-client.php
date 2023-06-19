@@ -8,14 +8,14 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header> -->
         <h1>Welkom bij de Bread Company</h1>
         <!-- hieronder wordt het menu opgehaald. -->
         <?php
         session_start();
         include "nav.php";
         ?>
-    </header>
+    <!-- </header> -->
 
     <main class="flexverticalcenter">
         <h2 class="spacebelowabove">Overzicht van alle klanten met aantal aankopen per klant</h2>

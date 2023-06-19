@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="company.css">
 </head>
 
-<body>
+<!-- <body> -->
 	<header>
 		<h1>Welkom bij de Bread Company</h1>
 		<!-- hieronder wordt het menu opgehaald. -->
@@ -15,7 +15,7 @@
 		session_start();
 		include "nav.php";
 		?>
-	</header>
+	<!-- </header> -->
 
 	<!-- Door ChatGPT gegenereerde tekst over de historie van Bread Company -->
 	<main>

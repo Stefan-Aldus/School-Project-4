@@ -21,12 +21,12 @@
         header("Location: register.php");
     }
     ?>
-    <header>
+    <!-- <header> -->
         <?php include 'nav.php' ?>
         <h1>Welkom bij de Bread Company</h1>
         <h2>Hier kunt u Registreren!</h2>
         <p>Kloppen de volgende gegevens?</p>
-    </header>
+    <!-- </header> -->
 
     <form method="POST" action="registerscript.php">
         <div>

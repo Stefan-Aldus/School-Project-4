@@ -19,13 +19,13 @@
 		echo "<p>Account succesvol aangemaakt! U kunt nu inloggen.</p>";
 	}
 	?>
-	<header>
+	<!-- <header> -->
 		<h1>Welkom bij de Bread Company</h1>
 		<!-- hieronder wordt het menu opgehaald. -->
 		<?php
 		include "nav.php";
 		?>
-	</header>
+	<!-- </header> -->
 
 	<!-- Deze pagina is bestemd om functionaliteiten die nog niet af zijn van een 
 	nette boodschap te voorzien -->
