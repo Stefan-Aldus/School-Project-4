@@ -94,7 +94,7 @@
   if (isset($_POST["confirm"])) {
     addToDB($db);
   } else {
-    exit("U heeft deze pagina op de verkeerde manier bezocht!");
+    exit();
   }
   ?>
 
