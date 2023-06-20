@@ -104,14 +104,17 @@
           echo '<li><a href="logout.php" class="scndlvl">Log Uit</a></li>';
           echo '<li><a href="change-pass.php" class="scndlvl">verander wachtwoord</a></li>';
           echo '<li><a href="change-userinfo.php" class="scndlvl">Verander Info</a></li>';
-          echo '<li><a href="#" class="scndlvl">KlantPagina Ofz</a></li>';
+          echo '<li><a href="supplierlist.php" class="scndlvl">Leverancier Informatie</a></li>';
+
+          // echo '<li><a href="change-userinfo.php" class="scndlvl">Verander Userinfo</a></li>';
         } elseif (isset($_SESSION["signedInAdmin"])) {
           echo '<li><a href="logout-admin.php" class="scndlvl">Logout</a></li>';
           echo '<li><a href="change-order.php" class="scndlvl">change orders</a></li>';
-          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
-          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
-          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
-          echo '<li><a href="#" class="scndlvl">Adminpagina Ofz</a></li>';
+          echo '<li><a href="change-supp.php" class="scndlvl">Change Supp Info</a></li>';
+          echo '<li><a href="remove-country.php" class="scndlvl">Remove country</a></li>';
+          echo '<li><a href="orderlist-price.php" class="scndlvl">Bestelling Informatie</a></li>';
+          echo '<li><a href="orderlist.php" class="scndlvl">Bestelling lijst</a></li>';
+          echo '<li><a href="remove-order.php" class="scndlvl">order verwijderen</a></li>';
         }
         ?>
       </ul>
