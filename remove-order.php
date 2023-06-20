@@ -28,7 +28,20 @@
         require_once("dbconnect.php");
 
         // Alle producten ophalen met de bijbehorende gegevens
-        $query = $db->prepare("SELECT * FROM country ");
+        $query = $db->prepare("SELECT client.*, purchase.*
+        FROM client
+        LEFT JOIN purchase ON client.ID = purchase.clientid
+        WHERE purchase.clientid IS NULL OR client.ID IN (
+          SELECT purchase.clientid
+          FROM purchase
+          WHERE purchase.delivered = 1
+        )
+        AND client.ID NOT IN (
+          SELECT purchase.clientid
+          FROM purchase
+          WHERE purchase.delivered = 0
+        )");
+
         $query->execute();
         $resultq = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -40,26 +53,29 @@
 
         echo "<table class='tableformat'>";
         echo "<thead>
-              <th>Land ID</th>
-              <th>Land Naam</th>
-              <th>Land Code</th>
+              <th>Purchase ID</th>
+              <th>Customer ID</th>
+              <th>Purchase ID</th>
+              <th>Delivered</th>
               <th>Verwijder</th>
               ";
 
 
         // Alle gegevens uit purchase op het scherm tonen
         foreach ($resultq as $data) {
-            echo '<form action="remove-country-script.php" method="post">';
+            echo '<form action="remove-order-script.php" method="post">';
             echo "<tr>";
-            echo "<td>" . $data["idcountry"] . "</td>";
-            echo "<td>" . $data["name"] . "</td>";
-            echo "<td>" . $data["code"] . "</td>";
+            echo "<td>" . $data["ID"] . "</td>";
+            echo "<td>" . $data["clientid"] . "</td>";
+            echo "<td>" . $data["purchasedate"] . "</td>";
+            echo "<td>" . $data["delivered"] . "</td>";
             echo '<td> <input type="submit" name="delete" value="verwijder"></td>';
 
             // Store the $data values in hidden input fields
-            echo '<input type="hidden" name="cid" value="' . $data["idcountry"] . '">';
-            echo '<input type="hidden" name="cname" value="' . $data["name"] . '">';
-            echo '<input type="hidden" name="ccode" value="' . $data["code"] . '">';
+            echo '<input type="hidden" name="clientid" value="' . $data["ID"] . '">';
+            echo '<input type="hidden" name="client-f-name" value="' . $data["clientid"] . '">';
+            echo '<input type="hidden" name="client-l-name" value="' . $data["purchasedate"] . '">';
+            echo '<input type="hidden" name="email" value="' . $data["delivered"] . '">';
             echo "</tr>";
             echo "</form>";
         }

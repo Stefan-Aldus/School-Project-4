@@ -13,12 +13,12 @@
 
     <?php
     session_start();
-    if (!isset($_SESSION["signedInAdmin"])) {
-        header_remove();
-        header("Location: index.php ");
-        header("Location: login.php ");
-        exit();
-    }
+    // if (!isset($_SESSION["signedInAdmin"])) {
+    //     header_remove();
+    //     header("Location: index.php ");
+    //     header("Location: login.php ");
+    //     exit();
+    // }
     include "nav.php";
 
     ?>
@@ -28,7 +28,10 @@
         require_once("dbconnect.php");
 
         // Alle producten ophalen met de bijbehorende gegevens
-        $query = $db->prepare("SELECT * FROM country ");
+        $query = $db->prepare("SELECT product.*, supplier.*
+        FROM product
+        INNER JOIN supplier ON product.supplierid = supplier.ID");
+
         $query->execute();
         $resultq = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -40,26 +43,30 @@
 
         echo "<table class='tableformat'>";
         echo "<thead>
-              <th>Land ID</th>
-              <th>Land Naam</th>
-              <th>Land Code</th>
-              <th>Verwijder</th>
+        <th>ID</th>
+              <th>Naam  </th>
+              <th>Prijs</th>
+              <th>Soort</th>
+              <th>Bedrijf</th>
               ";
 
 
         // Alle gegevens uit purchase op het scherm tonen
         foreach ($resultq as $data) {
-            echo '<form action="remove-country-script.php" method="post">';
+            echo '<form action="remove-order-script.php" method="post">';
             echo "<tr>";
-            echo "<td>" . $data["idcountry"] . "</td>";
-            echo "<td>" . $data["name"] . "</td>";
-            echo "<td>" . $data["code"] . "</td>";
-            echo '<td> <input type="submit" name="delete" value="verwijder"></td>';
+            echo "<td>" . $data["ID"] . "</td>";
+            echo "<td>" . $data["productname"] . "</td>";
+            echo "<td>" . $data["price"] . "</td>";
+            echo "<td>" . $data["categoryid"] . "</td>";
+            echo "<td>" . $data["supplierid"] . "</td>";
 
             // Store the $data values in hidden input fields
-            echo '<input type="hidden" name="cid" value="' . $data["idcountry"] . '">';
-            echo '<input type="hidden" name="cname" value="' . $data["name"] . '">';
-            echo '<input type="hidden" name="ccode" value="' . $data["code"] . '">';
+            echo '<input type="hidden" name="clientid" value="' . $data["ID"] . '">';
+            echo '<input type="hidden" name="client-f-name" value="' . $data["productname"] . '">';
+            echo '<input type="hidden" name="client-l-name" value="' . $data["price"] . '">';
+            echo '<input type="hidden" name="email" value="' . $data["company"] . '">';
+            // echo '<input type="hidden" name="email" value="' . $data["quantity"] . '">';
             echo "</tr>";
             echo "</form>";
         }
