@@ -15,12 +15,14 @@
     if (isset($_SESSION["signedInAdmin"])) {
         header("location: index.php"); // Replace "index.php" with the desired destination page
         exit();
+    } elseif (!isset($_POST["submitbtn"]) || !isset($_POST["submit"])) {
+
     }
-    include_once "./nav.php";
+    include_once "nav.php";
     require_once "dbconnect.php";
 
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["submitbtn"])) {
         $query = "UPDATE `client` SET ";
         $query .= "`first_name`=:first_name,";
         $query .= "`last_name`=:last_name,";
@@ -44,17 +46,21 @@
         $statement->bindParam(':telephone', $_POST["telephone"]);
         $statement->execute();
 
+        echo "setTimeout(function() {
+            window.location.href = 'index.php?message=info%20updated';
+          }, 5000);
+          ";
     }
 
-    $query = "SELECT first_name, last_name, adress, zipcode, city, state, country, telephone FROM client WHERE id = :id";
-    $statement = $db->prepare($query);
-    $statement->bindParam(':id', $_SESSION["signedInCustomer"]);
-    $statement->execute();
-    $_POST = $statement->fetchAll();
+    // $query = "SELECT first_name, last_name, adress, zipcode, city, state, country, telephone FROM client WHERE id = :id";
+    // $statement = $db->prepare($query);
+    // $statement->bindParam(':id', $_SESSION["signedInCustomer"]);
+    // $statement->execute();
+    // $_POST = $statement->fetchAll();
     ?>
     <form method="POST">
         <div>
-            <input type="text" name="nfn" value="<?php $_POST["nfn"] ?>" required>
+            <input type="text" name="nfn" value="<?php echo $_POST["nfn"] ?>" required>
             <span></span>
             <label>First Name</label>
         </div>
@@ -92,19 +98,11 @@
                 <label>Telephone number</label>
             </div>
         </div>
-        <select class="txt_field2" name="country" value="<?php echo $_POST['country'] ?>" id="countryname">
-            <option value="">Country</option>
-            <?php
-            foreach ($db->query("SELECT name FROM country") as $rij) {
-                if ($_POST['country'] === $rij['name']) {
-                    echo "<option selected value=\"" . $rij['name'] . "\">" . $rij["name"] . "</option>";
-                } else {
-                    echo "<option value=\"" . $rij['name'] . "\">" . $rij["name"] . "</option>";
-                }
-            }
-            ?>
-        </select>
-        <input class="gegevens_submit" type="submit" value="Gegevens Wijzigen">
+        <div>
+            <input type="text" name="country" id="country" value="<?php echo $_POST["nco"] ?>">
+            <label>LAND</label>
+        </div>
+        <input type="submit" value="Gegevens Wijzigen" name="submitbtn">
         <?php
         ?>
 
