@@ -83,6 +83,8 @@
         <li><a href="remove-client.php" class="scndlvl">Klant</a></li>
         <li><a href="remove-cat.php" class="scndlvl">Categorien</a></li>
         <li><a href="remove-product.php" class="scndlvl">producten</a></li>
+        <li><a href="remove-country.php" class="scndlvl">Remove country</a></li>
+        <li><a href="remove-order.php" class="scndlvl">order verwijderen</a></li>
       </ul>
     </li>
     <li class="main-item"><a href="#">Uw mening</a>
@@ -111,10 +113,8 @@
           echo '<li><a href="logout-admin.php" class="scndlvl">Logout</a></li>';
           echo '<li><a href="change-order.php" class="scndlvl">change orders</a></li>';
           echo '<li><a href="change-supp.php" class="scndlvl">Change Supp Info</a></li>';
-          echo '<li><a href="remove-country.php" class="scndlvl">Remove country</a></li>';
           echo '<li><a href="orderlist-price.php" class="scndlvl">Bestelling Informatie</a></li>';
           echo '<li><a href="orderlist.php" class="scndlvl">Bestelling lijst</a></li>';
-          echo '<li><a href="remove-order.php" class="scndlvl">order verwijderen</a></li>';
         }
         ?>
       </ul>
